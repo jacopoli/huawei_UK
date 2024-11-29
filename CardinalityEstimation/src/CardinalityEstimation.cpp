@@ -10,6 +10,7 @@ int id_cnt = 0;
 std::vector<Histogram *> hist(2); // Histogrammes pour les deux colonnes
 
 void CEEngine::insertTuple(const std::vector<int>& tuple) {
+    // Fonction modifée
     // Insertion d'un tuple : mise à jour des histogrammes
     end++;
     id_cnt++;
@@ -19,6 +20,7 @@ void CEEngine::insertTuple(const std::vector<int>& tuple) {
 }
 
 void CEEngine::deleteTuple(const std::vector<int>& tuple, int tupleId) {
+    // Fonction modifée
     // Suppression d'un tuple : mise à jour des histogrammes
     id_cnt--;
     for (int i = 0; i < 2; ++i) {
@@ -27,6 +29,7 @@ void CEEngine::deleteTuple(const std::vector<int>& tuple, int tupleId) {
 }
 
 int CEEngine::query(const std::vector<CompareExpression>& quals) {
+    // Fonction modifée
     // Requête pour estimer la cardinalité
     double ans = 1.0;
     for (int i = 0; i < quals.size(); ++i) {
@@ -43,6 +46,7 @@ int CEEngine::query(const std::vector<CompareExpression>& quals) {
 }
 
 void CEEngine::prepare() {
+    // Fonction modifée
     // Préparation des histogrammes si nécessaire
     if (std::abs(id_cnt) * 1.0 / size >= auto_analyze_factor) {
         sample(size, 10000, hist, dataExecuter); // Ré-échantillonnage
@@ -52,6 +56,7 @@ void CEEngine::prepare() {
 }
 
 CEEngine::CEEngine(int num, DataExecuter *dataExecuter) {
+    // Fonction modifée
     // Constructeur : initialisation des variables et des histogrammes
     this->dataExecuter = dataExecuter;
     size = num;
@@ -64,6 +69,7 @@ CEEngine::CEEngine(int num, DataExecuter *dataExecuter) {
 }
 
 void CEEngine::sample(int end, int size, std::vector<Histogram *> &hist, DataExecuter *dataExecuter) {
+    // Fonction modifée
     // Fonction d'échantillonnage pour construire les histogrammes
     std::vector<std::vector<int>> samp;
     int start = rand() % (end - size); // Choisir un point de départ aléatoire
